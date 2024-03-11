@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>Notes</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        
+
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="favicon.ico" />
         <!-- Bootstrap icons-->
@@ -15,12 +16,15 @@
     </head>
     <body>
         <div class="right-align">
-            <button class="btn btn-warning btn-lg " data-bs-toggle="modal" data-bs-target="#addNoteModal"><i class="bi bi-plus" id="plus-icon"></i></button>
+            <button class="btn btn-warning btn-lg circluar" data-bs-toggle="modal" data-bs-target="#addNoteModal"><i class="bi bi-plus" id="plus-icon"></i></button>
         </div>
         <header>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
+                <a class="navbar-brand d-flex align-items-center" href="#!">
+                    <img src="favicon.ico" alt="Logo" style="height:30px; margin-right:10px;">
+                  </a>
                 <a class="navbar-brand" href="#!">Notes</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -28,7 +32,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                         <li class="nav-item dropdown">
-                            <button class="btn btn-outline-primary" type="button">Sign in</button>
+                            <a href="login.html" class="btn btn-outline-primary">Login</a>
                             
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#!">All Products</a></li>
@@ -44,7 +48,7 @@
             </div>
         </nav>
         <!-- Header-->
-        <header class="bg-dark py-5">
+        <header class="bg-dark py-1">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Welcome to Notes</h1>
@@ -65,6 +69,10 @@
                                 <div class="text-center">
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">Note</h5>
+                                    <button type="button">Edit</button>
+                                    <button type="button">Delete</button>
+
+
                                     <!-- Product price-->
                                     
                                 </div>
