@@ -10,6 +10,7 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
 .navbar-brand {
   margin-left: -20px;
 }
@@ -43,8 +44,12 @@ body {
   margin-top: auto;
 }
 
-.footer {
-  margin-top: auto;
+.footer,
+footer {
+  position: fixed;
+  margin-bottom: 0px;
+  width: 100%;
+  bottom: 0;
 }
 
 .right-align {
