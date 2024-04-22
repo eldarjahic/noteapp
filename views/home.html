@@ -26,11 +26,35 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body">
+                <input id="noteTitle" class="form-control" type="text" placeholder="Enter Title">
                 <textarea id="noteContent" rows="10" cols="50" placeholder="Type your note here..."></textarea>
             </div>
             <div class="modal-footer">
                 <button id="saveNoteInModalButton" type="button" class="btn btn-warning">Save Note</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="editNoteModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Note</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="editNoteId" name="editNoteId" value="" />
+                <input id="editNoteTitle" class="form-control" type="text" placeholder="Enter Title">
+                <textarea id="editNoteContent" rows="10" cols="50" placeholder="Type your note here..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button id="saveEditedNoteInModalButton" type="button" class="btn btn-warning">Edit Note</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
@@ -48,6 +72,7 @@
             </div>
             <div class="modal-body">
                 <p>Modal body text goes here.</p>
+                <input type="hidden" id="noteId" name="noteId" value="" />
             </div>
             <div class="modal-footer">
                 <button id="deleteNoteButton" type="button" class="btn btn-warning">Delete Note</button>
@@ -56,70 +81,82 @@
         </div>
     </div>
 </div>
+<script>
+    function setDeleteNote(id) {
+        $('#noteId').val(id);
+
+    }
+    NoteService.get_notes();
+    $("#saveNoteInModalButton").click(function () {
+        var noteContent = $('#noteContent').val(); // Make sure this ID matches the ID of your textarea
+
+        if (noteContent === '') {
+            alert('Notes content cannot be empty');
+            return;
+        }
+
+        Utils.block_ui("#addNoteModal");
+
+        $.post(Constants.API_BASE_URL + "add_notes.php", { content: noteContent })
+            .done(function (data) {
+                Utils.unblock_ui("#addNoteModal");
+                $("#addNoteModal").modal("toggle");
+                toastr.success("You have successfully added the note.");
+                NoteService.reload_notes_datatable();
+            })
+            .fail(function (xhr) {
+                toastr.error("Error adding note.");
+            });
+
+    });
+    NoteService.get_notes();
+
+
+
+
+
+</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
-    $.ajax({
-        url: 'json/notes.json',
-        dataType: 'json',
-        success: function (notes) {
-            var notesHtml = '';
-            for (var i = 0; i < notes.length; i++) {
-                notesHtml += `
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <h5 class="fw-bolder">${notes[i].title}</h5>
-                            <p style="margin-top: 10px;">${notes[i].content}</p>
-                            <button type="button" class="btn btn-warning editButton">Edit</button>
-                            <button type="button" class="btn btn-warning deleteButton" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-            }
-            $('.row').html(notesHtml);
-            var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-            document.getElementById('deleteNoteButton').addEventListener('click', function () {
-                alert('This note has been deleted.');
-                deleteModal.hide();
-            });
 
-
-
-        },
-        error: function () {
-            console.log("An error occurred while fetching the notes data.");
-        }
-    });
-
-    /*$(document).on('click', '.deleteButton', function () { 
-        $('#deleteModal').modal('show');
-        console.log("aa")
-    }); */
 
     var myModal = new bootstrap.Modal(document.getElementById('addNoteModal'));
     document.getElementById('saveNoteInModalButton').addEventListener('click', function () {
-        alert('The note has been added.');
+        const titleInput = document.getElementById("noteTitle");
+        const title = titleInput.value;
+        const contentInput = document.getElementById("noteContent");
+        const content = contentInput.value;
+        const note = {
+            id: null,
+            title: title,
+            content: content
+        };
+        NoteService.add_note(note);
         myModal.hide();
     });
 
-    /*var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-    document.getElementsByClassName('deleteButton')[0].forEach(element => {
-        element.addEventListener('click', function () {
-            alert('This note has been deleted.');
-            deleteModal.hide();
-        });
+    var myModal = new bootstrap.Modal(document.getElementById('addNoteModal'));
+    document.getElementById('deleteNoteButton').addEventListener('click', function () {
+        const noteId = document.getElementById("noteId").value;
+        NoteService.delete_note(noteId);
 
-    }); */
+    });
 
 
+    document.getElementById('saveEditedNoteInModalButton').addEventListener('click', function () {
+        const noteId = document.getElementById("editNoteId").value;
+        const titleInput = document.getElementById("editNoteTitle");
+        const title = titleInput.value;
+        const contentInput = document.getElementById("editNoteContent");
+        const content = contentInput.value;
+        const note = {
+            title: title,
+            content: content
+        };
+        NoteService.edit_note(noteId, note);
 
-
-
-
+    });
 
 </script>
