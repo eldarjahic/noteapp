@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "/rest/services/NotesService.class.php";
+/*require_once __DIR__ . "/rest/services/NotesService.class.php";
 
 $request_body = file_get_contents("php://input");
 
@@ -24,5 +24,5 @@ $notes_service = new NotesService();
 // Get the note with the provided ID
 $note = $notes_service->get_by_id($id);
 
-echo json_encode(['message' => "Note fetched", 'data' => $note]);
+echo json_encode(['message' => "Note fetched", 'data' => $note]);*/
 ?>

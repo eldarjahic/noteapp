@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/rest/services/NotesService.class.php";
+/*require_once __DIR__ . "/rest/services/NotesService.class.php";
 
 $request_body = file_get_contents("php://input");
 
@@ -28,4 +28,4 @@ if(isset($payload['id']) && $payload['id'] != NULL && $payload['id'] != ''){
 
 
 echo json_encode(['message' => "You have successfully added the note", 'data' => $note]);
-?>
+?> */

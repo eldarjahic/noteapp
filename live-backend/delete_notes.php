@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/rest/services/NotesService.class.php";
+/*require_once __DIR__ . "/rest/services/NotesService.class.php";
 
 $note_id = $_REQUEST['id'];
 
@@ -12,5 +12,5 @@ $notes_service = new NotesService();
 
 $notes_service->delete_notes($note_id);
 
-echo json_encode(['message' => "Note deleted successfully"]);
+echo json_encode(['message' => "Note deleted successfully"]);*/
 ?>

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/rest/services/NotesService.class.php";
+/*require_once __DIR__ . "/rest/services/NotesService.class.php";
 
 $note_id = $_REQUEST['id'];
 
@@ -27,5 +27,5 @@ if (isset($result['error'])) {
     die(json_encode(['error' => $result['error']]));
 }
 
-echo json_encode(['message' => "Note updated successfully"]);
+echo json_encode(['message' => "Note updated successfully"]);*/
 ?>

@@ -12,9 +12,12 @@ class NotesDao extends BaseDao{
     
     public function add($entity){
     $query = "INSERT INTO notes (title, content) VALUES (:title, :content)";
+   
     
     $stmt= $this->connection->prepare($query);
-    $stmt->execute($entity); // sql injection prevention
+    $stmt->bindParam(':title', $entity['title']);
+    $stmt->bindParam(':content', $entity['content']);
+    $stmt->execute();
     $entity['id'] = $this->connection->lastInsertId();
     return $entity;
   }

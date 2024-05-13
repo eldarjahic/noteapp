@@ -1,10 +1,12 @@
 var NoteService = {
   get_notes: function () {
-    RestClient.get("get_notes.php", function (raw_data) {
-      const data = JSON.parse(raw_data);
-      console.log(typeof data);
-      const notes = data.data;
-      console.log(data);
+    RestClient.get("notes", function (raw_data) {
+      console.log(raw_data);
+      //const data = JSON.parse(raw_data);
+      
+      //const notes = data.data;
+      const notes = raw_data;
+      
       var notesHtml = "";
       for (var i = 0; i < notes.length; i++) {
         notesHtml += `
@@ -36,12 +38,12 @@ var NoteService = {
     });
   },
   delete_note: function (id) {
-    RestClient.delete("delete_notes.php?id=" + id, null, function (data) {
+    RestClient.delete("notes/" + id, null, function (data) {
       NoteService.get_notes();
     });
   },
   add_note: function (note) {
-    RestClient.post("add_notes.php", JSON.stringify(note), function (data) {
+    RestClient.post("notes", JSON.stringify(note), function (data) {
       $("#addNoteModal").modal("hide");
       NoteService.get_notes();
     });
@@ -65,8 +67,8 @@ var NoteService = {
     myModal.show();
   },
   edit_note: function (id, note) {
-    RestClient.post(
-      "edit_notes.php?id=" + id,
+    RestClient.put(
+      "notes/" + id,
       JSON.stringify(note),
       function (data) {
         $("#editNoteModal").modal("hide");

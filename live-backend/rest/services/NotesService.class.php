@@ -10,22 +10,23 @@ class NotesService
 
 
     }
-    public function add_notes($notes)
+    public function add($notes)
     {
+        
         return $this->notes_dao->add($notes);
     }
 
-    public function get_notes()
+    public function get_all()
     {
         return $this->notes_dao->get_all();
     }
 
 
-     public function delete_notes($id)
+     public function delete($id)
     {
         return $this->notes_dao->delete_notes($id);
     }
-    public function edit_notes($id, $body)
+    public function update($id, $body)
     {
         return $this->notes_dao->edit_notes($id, $body);
     }
