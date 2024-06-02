@@ -16,6 +16,7 @@ var RestClient = {
         url: Constants.API_BASE_URL + url,
         type: method,
         data: data,
+        headers: { 'Authentication':  localStorage.getItem('token') },
     })
     .done(function (response, status, jqXHR) {
         console.log("Request successful!");

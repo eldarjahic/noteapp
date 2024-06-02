@@ -12,7 +12,7 @@ require_once __DIR__ . '/../services/NotesService.class.php';
  *      tags={"notes"},
  *      summary="Get all notes - dummy route for understanding the benefit of tags in the swagger",
  *      @OA\Response(
- *           response=200,
+ *           response="200",
  *           description="Array of all notes in the databases"
  *      )
  * )

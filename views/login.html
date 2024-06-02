@@ -99,6 +99,7 @@
             Utils.unblock_ui("#login-form-container")
             Utils.set_to_localstorage("user", response)
             console.log("response is ", response);
+            window.location.href = '#view_home';
           },
           function (error){
             Utils.unblock_ui("#login-form-container")

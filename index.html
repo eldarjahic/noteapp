@@ -38,8 +38,9 @@
                                     href="#view_home">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="#view_about">About</a></li>
                             <li class="nav-item dropdown">
-                                <a href="#view_login" class="btn btn-outline-warning">Login</a>
+                                <a href="#view_login" class="btn btn-outline-warning" id="loginButton">Login</a>
                             </li>
+                            
 
 
                         </ul>
@@ -57,6 +58,28 @@
                 <section id="view_home" data-load="home.html"></section>
 
             </main>
+
+            <script>
+                // Get the button
+                var button = document.getElementById('loginButton');
+            
+                // Check if the user is logged in
+                if (localStorage.getItem('user')) {
+                    // If the user is logged in, change the button to a logout button
+                    button.textContent = 'Logout';
+                    button.href = '#view_home';
+                    button.onclick = function() {
+                        // Replace 'user' with the actual name of the object that has the logout function
+                        user.logout();
+                    };
+                } else {
+                    // If the user is not logged in, change the button to a login button
+                    window.location.replace("#view_login");
+                    button.textContent = 'Login';
+                    button.href = '#view_login';
+                    button.onclick = null;
+                }
+            </script>
             <!-- Section-->
 
             <!-- Footer-->
@@ -83,6 +106,7 @@
             <script src="js/app.js"></script>
             <!-- Services -->
             <script src="./services/notes.js"></script>
+            <script src="./services/user.js"></script>
             
 
     </body>

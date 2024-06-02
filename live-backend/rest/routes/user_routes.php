@@ -66,32 +66,23 @@ Flight::group('/users', function() {
 
     /**
      * @OA\Get(
-     *      path="/users/get/{user_id}",
+     *      path="/users/info",
      *      tags={"users"},
-     *      summary="Get user by id",
+     *      summary="Get logged in users data by id",
      *      @OA\Response(
      *           response=200,
      *           description="user data, or false if user does not exist"
-     *      ),
-     *      @OA\Parameter(@OA\Schema(type="number"), in="path", name="user_id", example="1", description="user ID")
+     *      )
+     *     
      * )
      */
-    Flight::route('GET /@user_id', function($user_id) {
-        $user = Flight::get('user_service')->get_user_by_id($user_id);
-        Flight::json($user);
+    Flight::route('GET /info', function() {
+        
+        Flight::json(Flight::key('user'));
     });
 
-    Flight::route('GET /', function() {
-        try {
-            $token = Flight::request()->getHeader("Authentication");
-            if(!$token)
-                Flight::halt(401, "Missing authentication header");
-
-            JWT::decode($token, new Key(JWT_SECRET, 'HS256'));
-        } catch (\Exception $e) {
-            Flight::halt(401, $e->getMessage());
-        }
-
+    Flight::route('GET /', function() {    
+        
         $payload = Flight::request()->query;
 
         $params = [
