@@ -88,7 +88,6 @@
         $('#noteId').val(id);
 
     }
-    NoteService.get_notes();
     $("#saveNoteInModalButton").click(function () {
         var noteContent = $('#noteContent').val(); // Make sure this ID matches the ID of your textarea
 
@@ -104,7 +103,7 @@
                 Utils.unblock_ui("#addNoteModal");
                 $("#addNoteModal").modal("toggle");
                 toastr.success("You have successfully added the note.");
-                NoteService.reload_notes_datatable();
+                NoteService.get_notes();
             })
             .fail(function (xhr) {
                 toastr.error("Error adding note.");
