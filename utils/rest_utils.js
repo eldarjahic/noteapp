@@ -4,7 +4,9 @@ var RestClient = {
       url: Constants.API_BASE_URL + url,
       type: "GET",
       beforeSend: function(request) {
-        request.setRequestHeader("Authentication",  localStorage.getItem('token'));
+        console.log('Got to here');
+        console.log(window.localStorage.getItem('token'));
+        request.setRequestHeader("Authentication",  window.localStorage.getItem('token'));
       },
       success: function (response) {
         if (callback) callback(response);
