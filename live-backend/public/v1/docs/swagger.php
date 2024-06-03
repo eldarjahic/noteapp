@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../../../vendor/autoload.php';;
 
-define('BASE_URL', 'http://localhost/noteapp/live-backend/');
+define('BASE_URL', 'https://orca-app-v9rr8.ondigitalocean.app/live-backend/');
 
 error_reporting(0);
 
