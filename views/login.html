@@ -93,7 +93,7 @@
       FormValidation.validate("#login-form", {}, function(data){
         Utils.block_ui("#login-form-container");
         RestClient.post(
-          "live-backend/auth/login",
+          "live-backend/rest/login",
           data,
           function(response){
             Utils.unblock_ui("#login-form-container")
