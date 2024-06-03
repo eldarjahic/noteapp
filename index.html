@@ -64,7 +64,7 @@
                 var button = document.getElementById('loginButton');
             
                 // Check if the user is logged in
-                if (localStorage.getItem('user')) {
+                if (localStorage.getItem('token')) {
                     // If the user is logged in, change the button to a logout button
                     button.textContent = 'Logout';
                     button.href = '#view_home';
