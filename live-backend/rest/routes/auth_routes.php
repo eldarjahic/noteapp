@@ -29,41 +29,45 @@ Flight::group('/auth', function() {
      * )
      */
     Flight::route('POST /login', function() {
-        $payload = Flight::request()->data->getData();
+        try {
+            $payload = Flight::request()->data->getData();
 
-        $user = Flight::get('auth_service')->get_user_by_email($payload['email']);
+            $user = Flight::get('auth_service')->get_user_by_email($payload['email']);
 
 
-        if(!isset($user) || !password_verify($payload['password'], $user['password'])){
-            $hased_pass = password_hash('123456789', PASSWORD_DEFAULT);
+            if(!isset($user) || !password_verify($payload['password'], $user['password'])){
+                $hased_pass = password_hash('123456789', PASSWORD_DEFAULT);
 
-            Flight::json([
-                'message' => password_verify('123456789', $hased_pass),
-                'hased_pass' => $hased_pass,
-                'user_pass' => $user['password'],
-            ], 401);
-            return;
-            //Flight::halt(500, "Invalid username or password");
+                Flight::json([
+                    'message' => password_verify('123456789', $hased_pass),
+                    'hased_pass' => $hased_pass,
+                    'user_pass' => $user['password'],
+                ], 401);
+                return;
+                //Flight::halt(500, "Invalid username or password");
+            }
+
+            unset($user['password']);
+            
+            $jwt_payload = [
+                'user' => $user,
+                'iat' => time(),
+                // If this parameter is not set, JWT will be valid for life. This is not a good approach
+                'exp' => time() + (60 * 60 * 24) // valid for day
+            ];
+
+            $token = JWT::encode(
+                $jwt_payload,
+                Config::JWT_SECRET(),
+                'HS256'
+            );
+
+            Flight::json(
+                array_merge($user, ['token' => $token])
+            );
+        } catch (\Exception $e) {
+            Flight::halt(400, $e->getMessage());
         }
-
-        unset($user['password']);
-        
-        $jwt_payload = [
-            'user' => $user,
-            'iat' => time(),
-            // If this parameter is not set, JWT will be valid for life. This is not a good approach
-            'exp' => time() + (60 * 60 * 24) // valid for day
-        ];
-
-        $token = JWT::encode(
-            $jwt_payload,
-            Config::JWT_SECRET(),
-            'HS256'
-        );
-
-        Flight::json(
-            array_merge($user, ['token' => $token])
-        );
     });
 
     /**
