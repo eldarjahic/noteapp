@@ -3,7 +3,9 @@ var RestClient = {
     $.ajax({
       url: Constants.API_BASE_URL + url,
       type: "GET",
-      headers: { 'Authentication':  localStorage.getItem('user').token },
+      beforeSend: function(request) {
+        request.setRequestHeader("Authentication",  localStorage.getItem('token'));
+      },
       success: function (response) {
         if (callback) callback(response);
       },
