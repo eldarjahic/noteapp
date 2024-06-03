@@ -1,6 +1,6 @@
 var NoteService = {
   get_notes: function () {
-    RestClient.get("notes", function (raw_data) {
+    RestClient.get("/notes", function (raw_data) {
       console.log(raw_data);
       //const data = JSON.parse(raw_data);
       
@@ -28,7 +28,7 @@ var NoteService = {
     });
   },
   open_edit_patient_modal: function (notes_id) {
-    RestClient.get("get_patient.php?id=" + notes_id, function (data) {
+    RestClient.get("/get_patient.php?id=" + notes_id, function (data) {
       $("#add-patient-modal").modal("toggle");
       $("#add-patient-form input[name='id']").val(data.id);
       $("#add-patient-form input[name='first_name']").val(data.first_name);
@@ -38,12 +38,12 @@ var NoteService = {
     });
   },
   delete_note: function (id) {
-    RestClient.delete("notes/" + id, null, function (data) {
+    RestClient.delete("/notes/" + id, null, function (data) {
       NoteService.get_notes();
     });
   },
   add_note: function (note) {
-    RestClient.post("notes", JSON.stringify(note), function (data) {
+    RestClient.post("/notes", JSON.stringify(note), function (data) {
       $("#addNoteModal").modal("hide");
       NoteService.get_notes();
     });
@@ -68,7 +68,7 @@ var NoteService = {
   },
   edit_note: function (id, note) {
     RestClient.put(
-      "notes/" + id,
+      "/notes/" + id,
       JSON.stringify(note),
       function (data) {
         $("#editNoteModal").modal("hide");
