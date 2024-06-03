@@ -97,7 +97,8 @@
           data,
           function(response){
             Utils.unblock_ui("#login-form-container")
-            Utils.set_to_localstorage("token", response.token)
+            window.localStorage.setItem("token", response.token);
+
             console.log("response is ", response);
             window.location.href = '#view_home';
           },
