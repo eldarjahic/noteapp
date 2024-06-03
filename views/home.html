@@ -98,8 +98,17 @@
 
         Utils.block_ui("#addNoteModal");
 
-        $.post(Constants.API_BASE_URL + "/notes", { content: noteContent })
-            .done(function (data) {
+        $.ajax({
+            url: Constants.API_BASE_URL + "/notes", 
+            type: "POST",
+            data: { content: noteContent },
+            beforeSend: function(request) {
+            console.log('Got to here');
+            console.log(window.localStorage.getItem('token'));
+            request.setRequestHeader("Authentication",  window.localStorage.getItem('token'));
+            },
+        })
+        .done(function (data) {
                 Utils.unblock_ui("#addNoteModal");
                 $("#addNoteModal").modal("toggle");
                 toastr.success("You have successfully added the note.");

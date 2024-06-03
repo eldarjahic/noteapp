@@ -21,6 +21,11 @@ var RestClient = {
         url: Constants.API_BASE_URL + url,
         type: method,
         data: data,
+        beforeSend: function(request) {
+          console.log('Got to here');
+          console.log(window.localStorage.getItem('token'));
+          request.setRequestHeader("Authentication",  window.localStorage.getItem('token'));
+        },
     })
     .done(function (response, status, jqXHR) {
         console.log("Request successful!");
