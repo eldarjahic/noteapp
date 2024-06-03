@@ -90,7 +90,8 @@
     }
     $("#saveNoteInModalButton").click(function () {
         var noteContent = $('#noteContent').val(); // Make sure this ID matches the ID of your textarea
-
+        var noteTitle = $('#noteTitle').val();
+        
         if (noteContent === '') {
             alert('Notes content cannot be empty');
             return;
@@ -101,7 +102,7 @@
         $.ajax({
             url: Constants.API_BASE_URL + "/notes", 
             type: "POST",
-            data: { content: noteContent },
+            data: { content: noteContent, title: noteTitle, id: null },
             beforeSend: function(request) {
             console.log('Got to here');
             console.log(window.localStorage.getItem('token'));
