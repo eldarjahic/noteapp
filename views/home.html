@@ -99,7 +99,7 @@
 
         Utils.block_ui("#addNoteModal");
 
-        $.post(Constants.API_BASE_URL + "notes", { content: noteContent })
+        $.post(Constants.API_BASE_URL + "/notes", { content: noteContent })
             .done(function (data) {
                 Utils.unblock_ui("#addNoteModal");
                 $("#addNoteModal").modal("toggle");
