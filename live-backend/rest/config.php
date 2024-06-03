@@ -5,27 +5,27 @@
 
     class Config {
         public static function DB_NAME() {
-            return Config::get_env('DB_NAME', 'defaultdb');
+            return Config::get_env('DB_NAME', '');
         }
 
         public static function DB_PORT() {
-            return Config::get_env('DB_PORT', '25060');
+            return Config::get_env('DB_PORT', '');
         }
         
         public static function DB_USER() {
-            return Config::get_env('DB_USER', 'doadmin');
+            return Config::get_env('DB_USER', '');
         }
 
         public static function DB_PASSWORD() {
-            return Config::get_env('DB_PASSWORD', 'AVNS_2_y4_oaTVBUtPAuWKzj');
+            return Config::get_env('DB_PASSWORD', '');
         }
 
         public static function DB_HOST() {
-            return Config::get_env('DB_HOST', 'db-mysql-nyc3-48094-do-user-11553167-0.c.db.ondigitalocean.com');
+            return Config::get_env('DB_HOST', '');
         }
 
         public static function JWT_SECRET() {
-            return Config::get_env('JWT_SECRET', ']kmX9y*D[W2TaE.Pti*Fe]Y}6t8j+d');
+            return Config::get_env('JWT_SECRET', '');
         }
         public static function get_env($name, $default ) {
             return isset($_ENV[$name]) && trim($_ENV[$name]) != '' ? $_ENV[$name] : $default;
