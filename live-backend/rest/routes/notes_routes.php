@@ -12,7 +12,7 @@ require_once __DIR__ . '/../services/NotesService.class.php';
  *      tags={"notes"},
  *      summary="Get all notes - dummy route for understanding the benefit of tags in the swagger",
  *      security={
- *          {"ApiKey": {}}
+ *          {"ApiKeyAuth": {}}
  *      },
  *      @OA\Response(
  *           response="200",
